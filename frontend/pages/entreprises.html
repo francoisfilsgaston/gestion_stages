@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Entreprises | Gestion des stages</title>
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/entreprises.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================
+         SIDEBAR
+    ======================================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+            </div>
+
+            <div class="logo-text">
+
+                <strong>Gestion</strong>
+
+                <span>Stages</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">
+                PRINCIPAL
+            </p>
+
+
+            <a href="dashboard.html" class="nav-link">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Tableau de bord
+                </span>
+
+            </a>
+
+
+            <p class="nav-title">
+                GESTION
+            </p>
+
+
+            <a href="entreprises.html" class="nav-link active">
+
+                <i class="fa-solid fa-building"></i>
+
+                <span>
+                    Entreprises
+                </span>
+
+            </a>
+
+
+            <a href="encadreurs.html" class="nav-link">
+
+                <i class="fa-solid fa-user-tie"></i>
+
+                <span>
+                    Encadreurs
+                </span>
+
+            </a>
+
+
+            <a href="stages.html" class="nav-link">
+
+                <i class="fa-solid fa-briefcase"></i>
+
+                <span>
+                    Stages
+                </span>
+
+            </a>
+
+
+            <a href="evaluations.html" class="nav-link">
+
+                <i class="fa-solid fa-star"></i>
+
+                <span>
+                    Évaluations
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button type="button" id="logoutButton" class="logout-button">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Déconnexion
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ======================================
+         CONTENU PRINCIPAL
+    ======================================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button type="button" id="menuButton" class="menu-button">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div>
+
+                    <h1>
+                        Entreprises
+                    </h1>
+
+                    <p>
+                        Gestion des entreprises partenaires
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                </div>
+
+                <div class="admin-info">
+
+                    <strong id="adminEmail">
+                        Administrateur
+                    </strong>
+
+                    <span>
+                        Administrateur
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENU -->
+
+        <section class="page-content">
+
+
+            <!-- En-tête -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <div class="page-title">
+
+                        <div class="title-icon">
+
+                            <i class="fa-solid fa-building"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Entreprises
+                            </h2>
+
+                            <p>
+                                Ajoutez et gérez les entreprises
+                                accueillant les étudiants en stage.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button" id="addButton" class="primary-button">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Nouvelle entreprise
+
+                </button>
+
+            </div>
+
+
+            <!-- Message global -->
+
+            <div id="message" class="message"></div>
+
+
+            <!-- Barre de recherche -->
+
+            <div class="toolbar">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="search" id="searchInput" placeholder="Rechercher une entreprise...">
+
+                </div>
+
+
+                <button type="button" id="refreshButton" class="secondary-button">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Actualiser
+
+                </button>
+
+            </div>
+
+
+            <!-- Tableau -->
+
+            <div class="table-card">
+
+                <div class="table-header">
+
+                    <div>
+
+                        <h3>
+                            Liste des entreprises
+                        </h3>
+
+                        <p>
+                            <span id="entrepriseCount">0</span>
+                            entreprise(s)
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Entreprise
+                                </th>
+
+                                <th>
+                                    Contact
+                                </th>
+
+                                <th>
+                                    Secteur
+                                </th>
+
+                                <th>
+                                    Date de création
+                                </th>
+
+                                <th class="actions-column">
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="entreprisesTableBody">
+
+                            <!-- Rempli par JavaScript -->
+
+                        </tbody>
+
+                    </table>
+
+
+                    <!-- Chargement -->
+
+                    <div id="loading" class="loading">
+
+                        <div class="spinner"></div>
+
+                        <p>
+                            Chargement des entreprises...
+                        </p>
+
+                    </div>
+
+
+                    <!-- Aucun résultat -->
+
+                    <div id="emptyState" class="empty-state">
+
+                        <div class="empty-icon">
+
+                            <i class="fa-solid fa-building"></i>
+
+                        </div>
+
+                        <h3>
+                            Aucune entreprise
+                        </h3>
+
+                        <p>
+                            Aucune entreprise ne correspond
+                            à votre recherche.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+                © 2026 Gestion des stages — Administration
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <!-- ======================================
+         MODAL AJOUT / MODIFICATION
+    ======================================= -->
+
+    <div id="modalOverlay" class="modal-overlay">
+
+        <div class="modal">
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <div class="modal-icon">
+
+                        <i id="modalIcon" class="fa-solid fa-building"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-title">
+
+                    <h2 id="modalTitle">
+                        Nouvelle entreprise
+                    </h2>
+
+                    <p id="modalSubtitle">
+                        Ajouter une entreprise partenaire
+                    </p>
+
+                </div>
+
+
+                <button type="button" id="closeModalButton" class="close-button">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- Formulaire -->
+
+            <form id="entrepriseForm">
+
+
+                <!-- Nom -->
+
+                <div class="form-group">
+
+                    <label for="nom">
+
+                        <i class="fa-solid fa-building"></i>
+
+                        Nom de l'entreprise
+                        <span>*</span>
+
+                    </label>
+
+                    <input type="text" id="nom" name="nom" placeholder="Ex : ABC Technologies" required>
+
+                </div>
+
+
+                <!-- Adresse -->
+
+                <div class="form-group">
+
+                    <label for="adresse">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Adresse
+
+                    </label>
+
+                    <input type="text" id="adresse" name="adresse" placeholder="Adresse de l'entreprise">
+
+                </div>
+
+
+                <!-- Téléphone + Email -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="telephone">
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            Téléphone
+
+                        </label>
+
+                        <input type="tel" id="telephone" name="telephone" placeholder="+257 ...">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            Email
+
+                        </label>
+
+                        <input type="email" id="email" name="email" placeholder="contact@entreprise.com">
+
+                    </div>
+
+                </div>
+
+
+                <!-- Secteur -->
+
+                <div class="form-group">
+
+                    <label for="secteur">
+
+                        <i class="fa-solid fa-industry"></i>
+
+                        Secteur d'activité
+
+                    </label>
+
+                    <input type="text" id="secteur" name="secteur" placeholder="Ex : Informatique">
+
+                </div>
+
+
+                <!-- Actions -->
+
+                <div class="modal-actions">
+
+                    <button type="button" id="cancelButton" class="cancel-button">
+
+                        Annuler
+
+                    </button>
+
+
+                    <button type="submit" id="saveButton" class="primary-button">
+
+                        <span id="saveButtonText">
+
+                            <i class="fa-solid fa-floppy-disk"></i>
+
+                            Enregistrer
+
+                        </span>
+
+                        <span id="saveLoader" class="button-loader"></span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================
+         MODAL SUPPRESSION
+    ======================================= -->
+
+    <div id="deleteOverlay" class="modal-overlay">
+
+        <div class="delete-modal">
+
+            <div class="delete-icon">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </div>
+
+            <h2>
+                Supprimer l'entreprise ?
+            </h2>
+
+            <p>
+                Voulez-vous vraiment supprimer
+                <strong id="deleteEntrepriseName"></strong> ?
+                <br>
+                Cette action est irréversible.
+            </p>
+
+
+            <div class="modal-actions">
+
+                <button type="button" id="cancelDeleteButton" class="cancel-button">
+
+                    Annuler
+
+                </button>
+
+
+                <button type="button" id="confirmDeleteButton" class="delete-button">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    Supprimer
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script src="../js/entreprises.js"></script>
+
+</body>
+
+</html>

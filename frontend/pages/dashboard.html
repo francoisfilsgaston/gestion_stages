@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tableau de bord | Gestion des stages</title>
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================
+         SIDEBAR
+    ======================================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Logo -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div class="logo-text">
+                <strong>Gestion</strong>
+                <span>Stages</span>
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">
+                PRINCIPAL
+            </p>
+
+
+            <a href="dashboard.html" class="nav-link active">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Tableau de bord
+                </span>
+
+            </a>
+
+
+            <p class="nav-title">
+                GESTION
+            </p>
+
+
+            <a href="entreprises.html" class="nav-link">
+
+                <i class="fa-solid fa-building"></i>
+
+                <span>
+                    Entreprises
+                </span>
+
+            </a>
+
+
+            <a href="encadreurs.html" class="nav-link">
+
+                <i class="fa-solid fa-user-tie"></i>
+
+                <span>
+                    Encadreurs
+                </span>
+
+            </a>
+
+
+            <a href="stages.html" class="nav-link">
+
+                <i class="fa-solid fa-briefcase"></i>
+
+                <span>
+                    Stages
+                </span>
+
+            </a>
+
+
+            <a href="evaluations.html" class="nav-link">
+
+                <i class="fa-solid fa-star"></i>
+
+                <span>
+                    Évaluations
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- Sidebar bottom -->
+
+        <div class="sidebar-bottom">
+
+            <button type="button" id="logoutButton" class="logout-button">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Déconnexion
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ======================================
+         CONTENU PRINCIPAL
+    ======================================= -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button type="button" id="menuButton" class="menu-button">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div>
+
+                    <h1>
+                        Tableau de bord
+                    </h1>
+
+                    <p>
+                        Vue générale de la gestion des stages
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Administrateur -->
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <div class="admin-info">
+
+                    <strong id="adminEmail">
+                        Administrateur
+                    </strong>
+
+                    <span>
+                        Administrateur
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENU -->
+
+        <section class="dashboard-content">
+
+
+            <!-- Bienvenue -->
+
+            <div class="welcome-card">
+
+                <div class="welcome-text">
+
+                    <span>
+                        <i class="fa-solid fa-hand-wave"></i>
+                        Bienvenue
+                    </span>
+
+                    <h2>
+                        Espace d'administration
+                    </h2>
+
+                    <p>
+                        Gérez facilement les entreprises,
+                        les encadreurs, les stages et les évaluations.
+                    </p>
+
+                </div>
+
+
+                <div class="welcome-icon">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATISTIQUES -->
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Vue d'ensemble
+                    </h2>
+
+                    <p>
+                        Statistiques actuelles
+                    </p>
+
+                </div>
+
+                <button type="button" id="refreshButton" class="refresh-button">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Actualiser
+
+                </button>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+
+                <!-- Entreprises -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <i class="fa-solid fa-building"></i>
+
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>
+                            Entreprises
+                        </span>
+
+                        <strong id="totalEntreprises">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-arrow">
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </div>
+
+                </div>
+
+
+                <!-- Encadreurs -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>
+                            Encadreurs
+                        </span>
+
+                        <strong id="totalEncadreurs">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-arrow">
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </div>
+
+                </div>
+
+
+                <!-- Stages -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>
+                            Stages
+                        </span>
+
+                        <strong id="totalStages">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-arrow">
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </div>
+
+                </div>
+
+
+                <!-- Évaluations -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+
+                        <i class="fa-solid fa-star"></i>
+
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>
+                            Évaluations
+                        </span>
+
+                        <strong id="totalEvaluations">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-arrow">
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RACCOURCIS -->
+
+            <div class="section-heading shortcuts-heading">
+
+                <div>
+
+                    <h2>
+                        Accès rapide
+                    </h2>
+
+                    <p>
+                        Accédez rapidement aux différentes fonctionnalités
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+
+                <a href="entreprises.html" class="quick-card">
+
+                    <div class="quick-icon blue">
+
+                        <i class="fa-solid fa-building"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Entreprises
+                        </h3>
+
+                        <p>
+                            Gérer les entreprises
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+
+                </a>
+
+
+                <a href="encadreurs.html" class="quick-card">
+
+                    <div class="quick-icon purple">
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Encadreurs
+                        </h3>
+
+                        <p>
+                            Gérer les encadreurs
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+
+                </a>
+
+
+                <a href="stages.html" class="quick-card">
+
+                    <div class="quick-icon orange">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Stages
+                        </h3>
+
+                        <p>
+                            Suivre les stages
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+
+                </a>
+
+
+                <a href="evaluations.html" class="quick-card">
+
+                    <div class="quick-icon green">
+
+                        <i class="fa-solid fa-star"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Évaluations
+                        </h3>
+
+                        <p>
+                            Gérer les évaluations
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+                © 2026 Gestion des stages —
+                Administration
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script src="../js/dashboard.js"></script>
+
+</body>
+
+</html>

@@ -87,6 +87,9 @@ const stageForm =
 const stageId =
     document.getElementById("stageId");
 
+const stageResourceSearch =
+    document.getElementById("stageResourceSearch");
+
 const etudiantId =
     document.getElementById("etudiantId");
 
@@ -391,6 +394,76 @@ function remplirSelectEncadreurs(selectedId = null) {
         encadreurId.appendChild(option);
     });
 }
+
+
+/* =========================================================
+   RECHERCHE DES RESSOURCES DE LA MODALE
+========================================================= */
+
+function normaliserRecherche(value) {
+
+    return String(value || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+}
+
+
+function rechercherRessourceStage() {
+
+    const recherche = normaliserRecherche(
+        stageResourceSearch.value
+    );
+
+    if (!recherche) {
+        return;
+    }
+
+    const etudiant = etudiants.find(item => {
+
+        const nom = normaliserRecherche(
+            `${item.nom || ""} ${item.prenom || ""}`
+        );
+
+        return nom.includes(recherche) ||
+            normaliserRecherche(item.email).includes(recherche);
+    });
+
+    if (etudiant) {
+        remplirSelectEtudiants(etudiant.id);
+        return;
+    }
+
+    const entreprise = entreprises.find(item =>
+        normaliserRecherche(item.nom).includes(recherche)
+    );
+
+    if (entreprise) {
+        remplirSelectEntreprises(entreprise.id);
+        return;
+    }
+
+    const encadreur = encadreurs.find(item => {
+
+        const nom = normaliserRecherche(
+            `${item.nom || ""} ${item.prenom || ""}`
+        );
+
+        return nom.includes(recherche) ||
+            normaliserRecherche(item.email).includes(recherche);
+    });
+
+    if (encadreur) {
+        remplirSelectEncadreurs(encadreur.id);
+    }
+}
+
+
+stageResourceSearch.addEventListener(
+    "input",
+    rechercherRessourceStage
+);
 
 
 /* =========================================================
@@ -769,6 +842,8 @@ function getStatutIcon(value) {
 function ouvrirAjout() {
 
     stageForm.reset();
+
+    stageResourceSearch.value = "";
 
     stageId.value = "";
 

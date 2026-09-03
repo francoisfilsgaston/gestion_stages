@@ -652,6 +652,17 @@ form {
     resize: vertical;
 }
 
+.evaluation-search-group {
+    margin-bottom: 14px;
+}
+
+.search-hint {
+    display: block;
+    margin-top: 5px;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
 .note-input {
     display: flex;
     align-items: center;

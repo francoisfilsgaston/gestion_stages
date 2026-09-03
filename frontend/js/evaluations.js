@@ -31,6 +31,7 @@ const deleteModal = document.getElementById("deleteModal");
 const evaluationForm = document.getElementById("evaluationForm");
 
 const evaluationId = document.getElementById("evaluationId");
+const evaluationSearch = document.getElementById("evaluationSearch");
 const etudiantId = document.getElementById("etudiantId");
 const stageId = document.getElementById("stageId");
 const note = document.getElementById("note");
@@ -479,6 +480,7 @@ document
         formError.classList.remove("show");
         formError.textContent = "";
 
+        evaluationSearch.value = "";
         remplirSelectEtudiants();
         remplirSelectStages();
 
@@ -512,6 +514,10 @@ function ouvrirModification(id) {
 
     const stage = trouverStage(evaluation.stage_id);
     const studentId = evaluation.etudiant_id || stage?.etudiant_id;
+
+    evaluationSearch.value = stage
+        ? `${nomEtudiant(studentId)} — ${stage.sujet || "Stage"}`
+        : "";
 
     remplirSelectEtudiants(studentId);
 
@@ -1209,4 +1215,48 @@ function remplirSelectEtudiants(selectedId = null) {
 
 etudiantId.addEventListener("change", () => {
     remplirSelectStages();
+});
+
+
+function normaliserRecherche(value) {
+
+    return String(value || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+
+}
+
+
+evaluationSearch.addEventListener("input", () => {
+
+    const recherche = normaliserRecherche(evaluationSearch.value);
+
+    if (!recherche) {
+        return;
+    }
+
+    const stageCorrespondant = stages.find(stage => {
+
+        const texteEtudiant = normaliserRecherche(
+            nomEtudiant(stage.etudiant_id)
+        );
+
+        const texteStage = normaliserRecherche(stage.sujet);
+        const texteEntreprise = normaliserRecherche(stage.entreprise_nom);
+
+        return texteEtudiant.includes(recherche) ||
+            texteStage.includes(recherche) ||
+            texteEntreprise.includes(recherche);
+
+    });
+
+    if (!stageCorrespondant) {
+        return;
+    }
+
+    remplirSelectEtudiants(stageCorrespondant.etudiant_id);
+    remplirSelectStages(stageCorrespondant.id);
+
 });

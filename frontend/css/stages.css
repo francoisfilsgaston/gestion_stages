@@ -867,6 +867,17 @@ tbody tr:hover {
     margin-bottom: 17px;
 }
 
+.stage-resource-search {
+    margin-bottom: 20px;
+}
+
+.stage-resource-search small {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
 .form-group label {
     display: flex;
 

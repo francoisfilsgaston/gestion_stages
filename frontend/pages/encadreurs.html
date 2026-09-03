@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Encadreurs - Gestion des stages</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/encadreurs.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div class="logo-text">
+                <strong>Gestion</strong>
+                <span>Stages</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">PRINCIPAL</p>
+
+            <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Tableau de bord</span>
+            </a>
+
+            <p class="nav-title">GESTION</p>
+
+            <a href="entreprises.html" class="nav-link">
+                <i class="fa-solid fa-building"></i>
+                <span>Entreprises</span>
+            </a>
+
+            <a href="encadreurs.html" class="nav-link active">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Encadreurs</span>
+            </a>
+
+            <a href="stages.html" class="nav-link">
+                <i class="fa-solid fa-briefcase"></i>
+                <span>Stages</span>
+            </a>
+
+            <a href="evaluations.html" class="nav-link">
+                <i class="fa-solid fa-star"></i>
+                <span>Évaluations</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button type="button" class="logout-button" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Déconnexion</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+    <!-- OVERLAY MOBILE -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <button class="menu-btn" id="menuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="page-title">
+                <h1>Encadreurs</h1>
+                <p>Gestion des encadreurs de stages</p>
+            </div>
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <div class="admin-info">
+                    <strong id="adminEmail">Administrateur</strong>
+                    <span>Administrateur</span>
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- CONTENT -->
+        <section class="content">
+
+            <!-- HEADER SECTION -->
+            <div class="content-header">
+
+                <div>
+                    <h2>Liste des encadreurs</h2>
+                    <p>Gérez les personnes responsables de l'encadrement des étudiants.</p>
+                </div>
+
+                <button class="btn btn-primary" id="openAddModal">
+                    <i class="fa-solid fa-plus"></i>
+                    Ajouter un encadreur
+                </button>
+
+            </div>
+
+            <!-- TOOLBAR -->
+            <div class="toolbar">
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="text" id="searchInput" placeholder="Rechercher un encadreur..." autocomplete="off">
+                </div>
+
+                <button class="refresh-btn" id="refreshBtn" title="Actualiser">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    <span>Actualiser</span>
+                </button>
+
+            </div>
+
+            <!-- STAT CARD -->
+            <div class="stats-card">
+
+                <div class="stats-icon">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+
+                <div class="stats-info">
+                    <span>Total encadreurs</span>
+                    <strong id="totalEncadreurs">0</strong>
+                </div>
+
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-card">
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Encadreur</th>
+                                <th>Contact</th>
+                                <th>Fonction</th>
+                                <th>Date de création</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="encadreursTableBody">
+
+                            <tr>
+                                <td colspan="5" class="loading-row">
+                                    <i class="fa-solid fa-spinner fa-spin"></i>
+                                    Chargement des encadreurs...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <!-- EMPTY STATE -->
+                <div class="empty-state" id="emptyState">
+
+                    <div class="empty-icon">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+
+                    <h3>Aucun encadreur trouvé</h3>
+
+                    <p>
+                        Aucun encadreur ne correspond à votre recherche.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================= -->
+    <!-- MODAL AJOUT / MODIFICATION -->
+    <!-- ========================= -->
+
+    <div class="modal-overlay" id="formModal">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2 id="modalTitle">Ajouter un encadreur</h2>
+                    <p id="modalSubtitle">
+                        Ajoutez un nouvel encadreur.
+                    </p>
+                </div>
+
+                <button class="close-modal" id="closeFormModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+            <form id="encadreurForm">
+
+                <input type="hidden" id="encadreurId">
+
+                <div class="form-grid">
+
+                    <!-- NOM -->
+                    <div class="form-group">
+
+                        <label for="nom">
+                            Nom
+                            <span>*</span>
+                        </label>
+
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user"></i>
+
+                            <input type="text" id="nom" name="nom" placeholder="Nom" required>
+                        </div>
+
+                    </div>
+
+                    <!-- PRENOM -->
+                    <div class="form-group">
+
+                        <label for="prenom">
+                            Prénom
+                            <span>*</span>
+                        </label>
+
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user"></i>
+
+                            <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+                        </div>
+
+                    </div>
+
+                    <!-- TELEPHONE -->
+                    <div class="form-group">
+
+                        <label for="telephone">
+                            Téléphone
+                        </label>
+
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-phone"></i>
+
+                            <input type="tel" id="telephone" name="telephone" placeholder="Ex : +257 79 00 00 00">
+                        </div>
+
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <input type="email" id="email" name="email" placeholder="encadreur@example.com">
+                        </div>
+
+                    </div>
+
+                    <!-- FONCTION -->
+                    <div class="form-group full-width">
+
+                        <label for="fonction">
+                            Fonction
+                        </label>
+
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-briefcase"></i>
+
+                            <input type="text" id="fonction" name="fonction"
+                                placeholder="Ex : Enseignant, Responsable RH...">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" id="cancelForm">
+                        Annuler
+                    </button>
+
+                    <button type="submit" class="btn btn-primary" id="saveBtn">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Enregistrer
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- MODAL SUPPRESSION -->
+    <!-- ========================= -->
+
+    <div class="modal-overlay" id="deleteModal">
+
+        <div class="modal delete-modal">
+
+            <div class="delete-icon">
+                <i class="fa-solid fa-trash"></i>
+            </div>
+
+            <h2>Supprimer l'encadreur ?</h2>
+
+            <p>
+                Cette action est irréversible.
+                Voulez-vous vraiment supprimer cet encadreur ?
+            </p>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" id="cancelDelete">
+                    Annuler
+                </button>
+
+                <button type="button" class="btn btn-danger" id="confirmDelete">
+
+                    <i class="fa-solid fa-trash"></i>
+                    Supprimer
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+
+        <div class="toast-icon">
+            <i class="fa-solid fa-check"></i>
+        </div>
+
+        <div class="toast-content">
+            <strong id="toastTitle">Succès</strong>
+            <span id="toastMessage">Opération réussie.</span>
+        </div>
+
+        <button id="closeToast">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </div>
+
+
+    <!-- JS -->
+    <script src="../js/encadreurs.js"></script>
+
+</body>
+
+</html>
